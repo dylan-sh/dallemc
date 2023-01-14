@@ -14,6 +14,7 @@ public class ChatListener implements Listener {
             Suggestion sug = new Suggestion(event.getMessage().substring(8));
             event.getPlayer().sendMessage(ChatColor.RED + sug.getText());
         }
+
         /**
         if(event.getMessage().substring(0,5).contains("/vote")){
             Suggestion sug = new Suggestion(event.getMessage().substring(8));

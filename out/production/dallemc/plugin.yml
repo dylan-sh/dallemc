@@ -3,3 +3,11 @@
   main: sh.dylan.dallemc.Main
   description: allows dalle mini in minecraft.
   author: Dylan Garcia
+
+  commands:
+    suggest:
+      description: allows players to suggest a string for voting
+      usage: '/suggest <string>'
+    vote:
+      description: allows players to vote on a suggested string
+      usage: '/vote <string>'
