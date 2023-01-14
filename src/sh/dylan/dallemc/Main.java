@@ -7,8 +7,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
     @Override
     public void onEnable(){
-        System.out.println("Starting up...");
+        System.out.println("Dalle MC ready to rumble...");
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
+
 
     }
 
