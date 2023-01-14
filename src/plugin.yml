@@ -1,4 +1,4 @@
-  name: Dallemc
+  name: DalleMC
   version: 1.0
   main: sh.dylan.dallemc.Main
   description: allows dalle mini in minecraft.

@@ -8,7 +8,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable(){
         System.out.println("Starting up...");
-        //Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 
     }
 
