@@ -1,2 +1,2 @@
 # Project exclude paths
-/out/
+# /out/ yes i am including the out folder because i am an ape and don't want to have to rebuild on my crummy windows desktop
