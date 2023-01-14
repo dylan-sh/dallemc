@@ -27,11 +27,11 @@ public class CommandSuggest implements CommandExecutor {
             player.sendMessage("You have already suggested something. Use /vote <string> to vote.");
             return true;
         }
-
+/** null pointer exception
         if (suggestions.containsKey(suggested)) {
             player.sendMessage("This has already been suggested.");
             return true;
-        }
+        }**/
 
         if (args.length == 0) {
             player.sendMessage("You must provide a suggestion.");
