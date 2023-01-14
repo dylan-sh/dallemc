@@ -31,7 +31,7 @@ public class CommandVote implements CommandExecutor {
         }
         // Perform the vote logic
         String voteArgument = args[0];
-        player.sendMessage("You voted for" + voteArgument + "!");
+        player.sendMessage("You voted for " + voteArgument + "!");
         votedPlayers.add(playerName);
         return true;
     }

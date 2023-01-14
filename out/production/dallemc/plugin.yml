@@ -11,3 +11,6 @@
     vote:
       description: allows players to vote on a suggested string
       usage: '/vote <string>'
+    listsuggestions:
+      description: allows players to list the suggestions as well as the number of votes
+      usage: '/listsuggestions'
