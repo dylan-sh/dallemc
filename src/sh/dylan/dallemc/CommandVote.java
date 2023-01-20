@@ -6,10 +6,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class CommandVote implements CommandExecutor {
-    private Set<String> votedPlayers = new HashSet<>();
+
+    boolean voted = false;
+    SuggestionDB suggestionDB = new SuggestionDB();
+    VoteRecords voteRecords = new VoteRecords();
+
+    public CommandVote(SuggestionDB suggestionDB, VoteRecords voteRecords) {
+        this.suggestionDB = suggestionDB;
+        this.voteRecords = new VoteRecords();
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -25,14 +34,20 @@ public class CommandVote implements CommandExecutor {
             return true;
         }
         String playerName = player.getName();
-        if (votedPlayers.contains(playerName)) {
+        if (voteRecords.hasVoted(player)) {
             player.sendMessage("You have already voted!");
             return true;
         }
-        // Perform the vote logic
-        String voteArgument = args[0];
-        player.sendMessage("You voted for " + voteArgument + "!");
-        votedPlayers.add(playerName);
-        return true;
+        String suggestion = args[0];
+
+        if (!suggestionDB.suggestionPresent(suggestion)) {
+            player.sendMessage("This isn't a current suggestion. You should try /suggest 'ing it!");
+            return true;
+        }else {
+            suggestionDB.incrementVote(suggestion);
+            voteRecords.addVote(suggestion, player);
+            player.sendMessage("You voted for " + suggestion);
+            return true;
+        }
     }
 }

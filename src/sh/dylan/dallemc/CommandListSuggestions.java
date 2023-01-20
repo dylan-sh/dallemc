@@ -5,11 +5,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Map;
+import java.util.ArrayList;
 
 public class CommandListSuggestions implements CommandExecutor {
-    private CommandSuggest suggestCommand = new CommandSuggest();
-    private CommandVote voteCommand = new CommandVote();
+
+    SuggestionDB suggestionDB;
+    public CommandListSuggestions(SuggestionDB suggestionDB){
+        this.suggestionDB = suggestionDB;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -18,15 +21,15 @@ public class CommandListSuggestions implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        Map<String,Integer> suggestions = suggestCommand.getSuggestions();
+        ArrayList<String> suggestions = suggestionDB.getSuggestions();
         if (suggestions.isEmpty()) {
-            player.sendMessage("No strings have been suggested yet.");
+            player.sendMessage("No strings have been suggested yet. Suggested one using /suggest <string> !");
             return true;
         }
         player.sendMessage("List of Suggestions: ");
-        for (Map.Entry<String, Integer> entry : suggestions.entrySet()) {
-            String suggestedString = entry.getKey();
-            int votes = entry.getValue();
+        for (String suggestion: suggestions) {
+            String suggestedString = suggestion;
+            int votes = suggestionDB.getVotes(suggestedString);
             player.sendMessage("- " + suggestedString + ": " + votes + " votes.");
         }
         return true;

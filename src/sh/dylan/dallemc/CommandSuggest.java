@@ -4,17 +4,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class CommandSuggest implements CommandExecutor {
-    private CommandVote voteCommand = new CommandVote();
-    private String suggestedString;
-    private boolean suggested = false;
 
-    private Map<String, Integer> suggestions;
+    //bunch of var bc i'm a chimp
+    private String suggestedString;
+
+    SuggestionDB suggestionDB = new SuggestionDB();
+    VoteRecords voteRecords = new VoteRecords();
+
+    public CommandSuggest(SuggestionDB suggestionDB) {
+        this.suggestionDB = suggestionDB;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -23,30 +25,23 @@ public class CommandSuggest implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        if (suggested) {
+        if (suggestionDB.checkIfPlayerSuggested(player)) {
             player.sendMessage("You have already suggested something. Use /vote <string> to vote.");
             return true;
         }
-/** null pointer exception
-        if (suggestions.containsKey(suggested)) {
-            player.sendMessage("This has already been suggested.");
-            return true;
-        }**/
 
         if (args.length == 0) {
             player.sendMessage("You must provide a suggestion.");
             return true;
         }
-        suggestedString = args[0];
-        suggested = true;
-        player.sendMessage("Suggested: " + suggestedString + ". Use /vote <string> to vote.");
+        String suggestion = args[0];
+        if (suggestionDB.suggestionPresent(suggestion)) {
+            player.sendMessage("This has already been suggested by " + suggestionDB.getSuggestor(suggestion).getDisplayName() + ". Use /vote <string> to vote for it.");
+        } else {
+            suggestionDB.addSuggestion(suggestion, player);
+            voteRecords.addVote(suggestion, player);
+            player.sendMessage("Suggestion successful!");
+        }
         return true;
-    }
-    public void vote(Player player,String[] args){
-        voteCommand.onCommand(player,null,"vote",args);
-    }
-
-    public Map<String, Integer> getSuggestions() {
-        return suggestions;
     }
 }

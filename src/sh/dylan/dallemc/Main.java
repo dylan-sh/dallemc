@@ -8,9 +8,12 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable(){
         System.out.println("Dalle MC ready to rumble...");
-        Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
-        getCommand("vote").setExecutor(new CommandVote());
-        getCommand("suggest").setExecutor(new CommandSuggest());
+        //Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
+        SuggestionDB suggestionDB = new SuggestionDB();
+        VoteRecords voteRecords = new VoteRecords();
+        getCommand("suggest").setExecutor(new CommandSuggest(suggestionDB));
+        getCommand("vote").setExecutor(new CommandVote(suggestionDB, voteRecords));
+        getCommand("listsuggestions").setExecutor(new CommandListSuggestions(suggestionDB));
 
 
     }
@@ -18,8 +21,10 @@ public class Main extends JavaPlugin {
     @Override
 
     public void onDisable(){
-        System.out.println("Shutting down...");
+        System.out.println("Shutting down DalleMC...");
     }
 }
+
+//rip ChatListener(), iykyk
 
 
