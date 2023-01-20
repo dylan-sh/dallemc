@@ -3,6 +3,7 @@ package sh.dylan.dallemc;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ public class VoteRecords {
 
     public VoteRecords()
     {
+        voteRecord = new HashMap<String, List<Player>>();
         System.out.println("VotedDB construction successful.");
     }
 

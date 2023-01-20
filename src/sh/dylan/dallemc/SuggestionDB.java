@@ -3,6 +3,7 @@ package sh.dylan.dallemc;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class SuggestionDB {
@@ -12,6 +13,8 @@ public class SuggestionDB {
 
     //bob the builder
     public SuggestionDB() {
+        suggestions = new HashMap<String, Integer>();
+        playerSuggested = new HashMap<String, Player>();
         System.out.println("SuggestionDB construction successful.");
     }
 
