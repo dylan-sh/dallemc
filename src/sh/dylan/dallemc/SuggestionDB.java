@@ -52,13 +52,28 @@ public class SuggestionDB {
     }
 
     public ArrayList getSuggestions(){
+        if(isSuggestionsEmpty()) {
+            return null;
+        }
+
         ArrayList<String> suggestionsList = new ArrayList<>();
         suggestionsList.addAll(suggestions.keySet());
         return suggestionsList;
     }
 
     public boolean checkIfPlayerSuggested(Player p){
+        if(isSuggestionsEmpty()){
+            return false;
+        }
+
         if(playerSuggested.containsValue(p)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isSuggestionsEmpty(){
+        if(suggestions.isEmpty()){
             return true;
         }
         return false;

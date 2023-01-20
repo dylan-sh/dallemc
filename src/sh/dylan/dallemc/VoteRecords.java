@@ -25,6 +25,10 @@ public class VoteRecords {
     }
 
     public boolean hasVoted(Player player){
+        if(isVoteRecordEmpty()){
+            return false;
+        }
+
         ArrayList<List<Player>> superList = new ArrayList<>();
         superList.addAll(voteRecord.values());
         for(List<Player> l : superList){
@@ -33,6 +37,13 @@ public class VoteRecords {
                     return true;
                 }
             }
+        }
+        return false;
+    }
+
+    public boolean isVoteRecordEmpty(){
+        if(voteRecord.isEmpty()){
+            return true;
         }
         return false;
     }
