@@ -21,11 +21,11 @@ public class CommandListSuggestions implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        ArrayList<String> suggestions = suggestionDB.getSuggestions();
-        if (suggestions.isEmpty()) {
+        if (suggestionDB.isSuggestionsEmpty()) {
             player.sendMessage("No strings have been suggested yet. Suggested one using /suggest <string> !");
             return true;
         }
+        ArrayList<String> suggestions = suggestionDB.getSuggestions();
         player.sendMessage("List of Suggestions: ");
         for (String suggestion: suggestions) {
             String suggestedString = suggestion;
