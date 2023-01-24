@@ -10,6 +10,7 @@ import java.util.Map;
 public class VoteRecords {
     private Map<String, List<Player>> voteRecord;
 
+    //i realize after the fact that this probably could've been done in the suggestionDB class. too late now though it's already written lol
     public VoteRecords()
     {
         voteRecord = new HashMap<String, List<Player>>();
@@ -48,5 +49,9 @@ public class VoteRecords {
             return true;
         }
         return false;
+    }
+
+    public void clearEverything(){
+        voteRecord.clear();
     }
 }

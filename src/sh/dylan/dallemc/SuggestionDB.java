@@ -81,4 +81,9 @@ public class SuggestionDB {
         }
         return false;
     }
+
+    public void clearEverything(){
+        suggestions.clear();
+        playerSuggested.clear();
+    }
 }
