@@ -44,6 +44,7 @@ public class Main extends JavaPlugin {
                                     return;
                                 }
                                 Bukkit.broadcastMessage("The winner is " + winner + " with " + suggestionDB.getVotes(winner) + " votes. It was suggested by " + suggestionDB.getSuggestor(winner).getDisplayName());
+                                suggestionDB.clearEverything();
                                 // Insert API call here
                             }
                         }, 200); // 20 ticks = 1 second
