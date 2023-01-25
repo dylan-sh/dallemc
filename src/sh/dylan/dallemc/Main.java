@@ -34,7 +34,16 @@ public class Main extends JavaPlugin {
                             public void run() {
                                 Bukkit.broadcastMessage("Voting has finished!");
                                 String winner = suggestionDB.getWinningSuggestion();
-                                Bukkit.broadcastMessage("The winner is " + winner + " with " + suggestionDB.getVotes(winner) + "votes. It was suggested by " + suggestionDB.getSuggestor(winner));
+                                if(winner == "")
+                                {
+                                    Bukkit.broadcastMessage("There are no suggestions. Nobody cares :(");
+                                    if(Bukkit.getServer().getOnlinePlayers().size() == 0)
+                                    {
+                                        Bukkit.broadcastMessage("I will continue to be here... waiting... for someone to join... but for now I will cycle on a loop of voting forever and always until someone comes my way, an eternity of loneliness...");
+                                    }
+                                    return;
+                                }
+                                Bukkit.broadcastMessage("The winner is " + winner + " with " + suggestionDB.getVotes(winner) + " votes. It was suggested by " + suggestionDB.getSuggestor(winner).getDisplayName());
                                 // Insert API call here
                             }
                         }, 200); // 20 ticks = 1 second

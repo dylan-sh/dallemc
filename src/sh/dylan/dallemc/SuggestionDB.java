@@ -92,6 +92,10 @@ public class SuggestionDB {
     //gets the winning suggestion. adds the suggestions with the most number of votes to an arraylist and picks from them at random.
     //normally this would just pick at random but the logic is designed for the event of a tie
     public String getWinningSuggestion(){
+
+        if(isSuggestionsEmpty()){
+            return "";
+        }
         int winSugCount = -1;
         ArrayList<String> winners = new ArrayList<>();
         ArrayList<String> suggestionList = new ArrayList<>(suggestions.keySet());
