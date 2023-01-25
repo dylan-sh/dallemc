@@ -24,7 +24,9 @@ public class ConfigParser {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("[FATAL] DalleMC is NOT configured. Please configure the txt in plugins/dallemc/config.txt. See README");
+            //not at all done yet
+            System.out.println("DalleMC config not detected. Generating one for you now (restart required)...");
+
         }
     }
 
