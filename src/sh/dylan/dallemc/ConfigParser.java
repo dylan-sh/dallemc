@@ -8,6 +8,7 @@ public class ConfigParser {
     private Map<String, String> config = new HashMap<>();
 
     public ConfigParser(String filepath) {
+        System.out.println("Config Parser attempting to parse...");
         try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
             String line;
             while ((line = reader.readLine()) != null) {
