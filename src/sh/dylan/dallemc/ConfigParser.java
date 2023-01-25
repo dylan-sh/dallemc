@@ -12,6 +12,7 @@ public class ConfigParser {
         //checks if file directory exists and makes it if it doesn't
         File directory = new File(direct);
         if(!directory.exists()){
+            System.out.println("\033[31m" + "[ERROR] Directory not detected. Creating directory..." + "\033[0m");
             directory.mkdirs();
         }
         filename = direct + filename;
@@ -28,7 +29,7 @@ public class ConfigParser {
                 config.put(parts[0].trim(), parts[1].trim());
             }
         } catch (FileNotFoundException e){
-            System.out.println("DalleMC config not detected. Generating one for you now (restart required)...");
+            System.out.println("\033[31m" + "DalleMC config not detected. Generating one for you now (restart required)..." + "\033[0m");
             try(PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
                 writer.println("API_OR_LOCAL=API"); //defaults to API cuz i def haven't coded local yet
                 writer.println("API_KEY=KEY GOES HERE");
