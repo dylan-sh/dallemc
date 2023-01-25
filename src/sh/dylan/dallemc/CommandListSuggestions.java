@@ -25,6 +25,7 @@ public class CommandListSuggestions implements CommandExecutor {
             player.sendMessage("No strings have been suggested yet. Suggested one using /suggest <string> !");
             return true;
         }
+        //need to sort by number of votes
         ArrayList<String> suggestions = suggestionDB.getSuggestions();
         player.sendMessage("List of Suggestions: ");
         for (String suggestion: suggestions) {
