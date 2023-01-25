@@ -1,10 +1,12 @@
 package sh.dylan.dallemc;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class SuggestionDB {
 
@@ -85,5 +87,30 @@ public class SuggestionDB {
     public void clearEverything(){
         suggestions.clear();
         playerSuggested.clear();
+    }
+
+    //gets the winning suggestion. adds the suggestions with the most number of votes to an arraylist and picks from them at random.
+    //normally this would just pick at random but the logic is designed for the event of a tie
+    public String getWinningSuggestion(){
+        int winSugCount = -1;
+        ArrayList<String> winners = new ArrayList<>();
+        ArrayList<String> suggestionList = new ArrayList<>(suggestions.keySet());
+        for(String s : suggestionList){
+            if(suggestions.get(s) > winSugCount){
+                winSugCount = suggestions.get(s);
+            }
+        }
+        for(String s : suggestionList){
+            if(suggestions.get(s) == winSugCount){
+                winners.add(s);
+            }
+        }
+        if(winners.size()>1){
+            Bukkit.broadcastMessage("There has been a tie. A suggestion will be chosen at random between the winners.");
+        }
+        Random rando = new Random();
+        int randIndex = rando.nextInt(winners.size());
+        String winner = winners.get(randIndex);
+        return winner;
     }
 }

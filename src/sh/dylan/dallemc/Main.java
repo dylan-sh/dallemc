@@ -13,7 +13,6 @@ public class Main extends JavaPlugin {
         //Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
         SuggestionDB suggestionDB = new SuggestionDB();
         VoteRecords voteRecords = new VoteRecords();
-        TimerClear vst = new TimerClear(suggestionDB, voteRecords);
         getCommand("suggest").setExecutor(new CommandSuggest(suggestionDB));
         getCommand("vote").setExecutor(new CommandVote(suggestionDB, voteRecords));
         getCommand("listsuggestions").setExecutor(new CommandListSuggestions(suggestionDB));
@@ -34,9 +33,11 @@ public class Main extends JavaPlugin {
                             @Override
                             public void run() {
                                 Bukkit.broadcastMessage("Voting has finished!");
+                                String winner = suggestionDB.getWinningSuggestion();
+                                Bukkit.broadcastMessage("The winner is " + winner + " with " + suggestionDB.getVotes(winner) + "votes. It was suggested by " + suggestionDB.getSuggestor(winner));
                                 // Insert API call here
                             }
-                        }, 20); // 20 ticks = 1 second
+                        }, 200); // 20 ticks = 1 second
 
                     }
                 }, 500);  // 500 ticks = 25 seconds
