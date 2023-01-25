@@ -24,7 +24,7 @@ public class ConfigParser {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            //not at all done yet
+            //not at all done yet lol
             System.out.println("DalleMC config not detected. Generating one for you now (restart required)...");
 
         }
