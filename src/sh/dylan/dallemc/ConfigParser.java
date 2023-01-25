@@ -27,6 +27,7 @@ public class ConfigParser {
                 }
                 //trim the parts and put them in the map
                 config.put(parts[0].trim(), parts[1].trim());
+                System.out.println("Parse successful! (I think)");
             }
         } catch (FileNotFoundException e){
             System.out.println("\033[31m" + "DalleMC config not detected. Generating one for you now (restart required)..." + "\033[0m");

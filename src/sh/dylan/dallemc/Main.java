@@ -8,7 +8,7 @@ public class Main extends JavaPlugin {
     public static Plugin instance = null;
     @Override
     public void onEnable(){
-        System.out.println("Dalle MC ready to rumble...");
+        System.out.println("Dalle MC Initializing...");
         instance = this;
         ConfigParser cfp = new ConfigParser("plugins/dallemc/","config.txt");
         SuggestionDB suggestionDB = new SuggestionDB();
@@ -16,6 +16,7 @@ public class Main extends JavaPlugin {
         getCommand("suggest").setExecutor(new CommandSuggest(suggestionDB));
         getCommand("vote").setExecutor(new CommandVote(suggestionDB, voteRecords));
         getCommand("listsuggestions").setExecutor(new CommandListSuggestions(suggestionDB));
+        System.out.println("\033[32m" + "Dalle MC is ready to rumble!" + "\033[0m");
         //timer section
         int delay = 0;
         int period = 2400;
