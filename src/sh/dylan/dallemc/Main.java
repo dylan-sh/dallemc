@@ -10,7 +10,7 @@ public class Main extends JavaPlugin {
     public void onEnable(){
         System.out.println("Dalle MC ready to rumble...");
         instance = this;
-        ConfigParser cfp = new ConfigParser("plugins/dallemc/config.txt");
+        ConfigParser cfp = new ConfigParser("plugins/dallemc/","config.txt");
         SuggestionDB suggestionDB = new SuggestionDB();
         VoteRecords voteRecords = new VoteRecords();
         getCommand("suggest").setExecutor(new CommandSuggest(suggestionDB));

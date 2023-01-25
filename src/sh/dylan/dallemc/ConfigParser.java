@@ -7,9 +7,15 @@ import java.util.Map;
 public class ConfigParser {
     private Map<String, String> config = new HashMap<>();
 
-    public ConfigParser(String filepath) {
+    public ConfigParser(String direct, String filename) {
         System.out.println("Config Parser attempting to parse...");
-        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+        //checks if file directory exists and makes it if it doesn't
+        File directory = new File(direct);
+        if(!directory.exists()){
+            directory.mkdirs();
+        }
+        filename = direct + filename;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 //split the line by the delimiter '='
@@ -23,7 +29,7 @@ public class ConfigParser {
             }
         } catch (FileNotFoundException e){
             System.out.println("DalleMC config not detected. Generating one for you now (restart required)...");
-            try(PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filepath)))){
+            try(PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
                 writer.println("API_OR_LOCAL=API"); //defaults to API cuz i def haven't coded local yet
                 writer.println("API_KEY=KEY GOES HERE");
             }catch(IOException e2){
