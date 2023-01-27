@@ -4,6 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.awt.*;
+import java.io.IOException;
+import java.sql.SQLOutput;
+
 public class Main extends JavaPlugin {
     public static Plugin instance = null;
     @Override
@@ -32,7 +36,7 @@ public class Main extends JavaPlugin {
 
                         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(instance, new Runnable() {
                             @Override
-                            public void run() {
+                            public void run(){
                                 Bukkit.broadcastMessage("Voting has finished!");
                                 String winner = suggestionDB.getWinningSuggestion();
                                 if(winner == "")
@@ -46,7 +50,14 @@ public class Main extends JavaPlugin {
                                 }
                                 Bukkit.broadcastMessage("The winner is " + winner + " with " + suggestionDB.getVotes(winner) + " votes. It was suggested by " + suggestionDB.getSuggestor(winner).getDisplayName());
                                 suggestionDB.clearEverything();
-                                // Insert API call here
+                                ImageGeneration imageGenerator = new ImageGeneration(cfp.getAPIKey(), winner);
+                                try {
+                                    Bukkit.broadcastMessage(imageGenerator.getImageAndSaveToPixelator());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+
                             }
                         }, 200); // 20 ticks = 1 second
 
