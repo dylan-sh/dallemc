@@ -36,12 +36,12 @@ public class ImageGeneration {
         if(checksIfAlreadyExists()){
             return "alreadyExists";
         }
-
+        //dunno if actually calling script correctly, modify script to save it's output to a txt to be sure
         String pythonScript = "plugins/dallemc/generate_dalle2.py"; //modify if you want to use another name or another api
         ProcessBuilder pb = new ProcessBuilder("python", pythonScript, apiKey, suggestion);
         Process process = pb.start();
         BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line;
+        String line;;
         while ((line = in.readLine()) != null) { //this doesn't need to be a while loop since only the first line matters, but it's here anyway
             System.out.println(line);
             if(line.substring(0,3) == "400"){

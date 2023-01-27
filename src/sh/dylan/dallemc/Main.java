@@ -15,7 +15,7 @@ public class Main extends JavaPlugin {
         System.out.println("Dalle MC Initializing...");
         instance = this;
         ConfigParser cfp = new ConfigParser("plugins/dallemc/","config.txt");
-        System.out.println(cfp.getAPIKey());
+        System.out.println("API KEY received:" + cfp.getAPIKey());
         SuggestionDB suggestionDB = new SuggestionDB();
         VoteRecords voteRecords = new VoteRecords();
         getCommand("suggest").setExecutor(new CommandSuggest(suggestionDB));
