@@ -21,4 +21,4 @@ except openai.error.OpenAIError as e:
 		output_txt.write(e.http_status)
 		output_txt.write(e.error)
 
-		#okay none of this works and i don't think it even executes so fix this shit
+		#okay none of this works and i don't think it even executes so fix this shtuff
