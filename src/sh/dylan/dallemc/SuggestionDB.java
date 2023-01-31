@@ -105,7 +105,7 @@ public class SuggestionDB {
             }
         }
         for(String s : suggestionList){
-            if(suggestions.get(s) == winSugCount){
+            if(suggestions.get(s).equals(winSugCount)){
                 winners.add(s);
             }
         }

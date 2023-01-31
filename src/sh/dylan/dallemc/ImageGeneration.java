@@ -44,19 +44,19 @@ public class ImageGeneration {
         String line;;
         while ((line = in.readLine()) != null) { //this doesn't need to be a while loop since only the first line matters, but it's here anyway
             System.out.println(line);
-            if(line.substring(0,3) == "400"){
+            if(line.substring(0,3).equals("400")){
                 System.out.println("\"\\033[31m\" + \"[API ERROR] Safety system denied (NSFW error)\" + \"\\033[0m\"");
                 Bukkit.broadcastMessage("Unsafe contented detected. Creation aborted (don't suggest nsfw content lol)");
                 return "nsfwError";
-            } else if(line.substring(0,3) == "401"){
+            } else if(line.substring(0,3).equals("401")){
                 System.out.println("\"\\033[31m\" + \"[API ERROR] Invalid authentication\" + \"\\033[0m\"");
                 Bukkit.broadcastMessage("System error. Contact admin.");
                 return "apiError";
-            } else if(line.substring(0,3) == "429"){
+            } else if(line.substring(0,3).equals("429")){
                 System.out.println("\"\\033[31m\" + \"[API ERROR] Rate limit or quota reached or OpenAI servers overloaded\" + \"\\033[0m\"");
                 Bukkit.broadcastMessage("System error. Contact admin.");
                 return "networkError";
-            } else if(line.substring(0,3) == "500"){
+            } else if(line.substring(0,3).equals("500")){
                 System.out.println("\"\\033[31m\" + \"[API ERROR] OpenAI server issues. Check status.openai.com\" + \"\\033[0m\"");
                 Bukkit.broadcastMessage("System error. Contact admin.");
                 return "openAInetworkError";
