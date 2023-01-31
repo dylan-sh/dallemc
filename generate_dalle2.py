@@ -17,3 +17,6 @@ try:
 except openai.error.OpenAIError as e:
 	print(e.http_status)
 	print(e.error)
+	with open('generate_dalle2_output.txt', 'w') as output_txt:
+		output_txt.write(e.http_status)
+		output_txt.write(e.error)
