@@ -22,3 +22,4 @@ except openai.error.OpenAIError as e:
 		output_txt.write(e.error)
 
 		#okay none of this works and i don't think it even executes so fix this shtuff
+		#i just realized i don't have openai as a module on my test environment that's why this isn't working
