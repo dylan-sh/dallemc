@@ -27,6 +27,7 @@ public class ConfigParser {
                 }
                 //trim the parts and put them in the map
                 config.put(parts[0].trim(), parts[1].trim());
+                System.out.println("[DEV] parsing: " + parts[0] + " " + parts[1]);
                 System.out.println("Parse successful! (I think)");
             }
         } catch (FileNotFoundException e){
