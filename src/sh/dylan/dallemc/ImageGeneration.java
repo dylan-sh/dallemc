@@ -43,7 +43,7 @@ public class ImageGeneration {
         BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;;
         System.out.println("[DEV] I got here.");
-        while ((line = in.readLine()) != null) { //this doesn't need to be a while loop since only the first line matters, but it's here anyway
+        if((line = in.readLine()) != null) { //this doesn't need to be a while loop since only the first line matters, but it's here anyway
             System.out.println(line);
             if(line.substring(0,3).equals("400")){
                 System.out.println("\"\\033[31m\" + \"[API ERROR] Safety system denied (NSFW error)\" + \"\\033[0m\"");
