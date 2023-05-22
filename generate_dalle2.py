@@ -26,8 +26,10 @@ try:
 	for idx, image_info in enumerate(jsonResponse["data"]):
 		image_url = image_info["url"]
 		filename = os.path.normpath(os.path.join(input_dir, PROMPT.replace(' ', '_') + f"_{idx}.png"))
-		os.system(f"curl -o '{filename}' '{image_url}'")
-		print(f"Image saved as {filename}")
+		r = requests.get(image_url)
+		with open(filename, 'wb') as f:
+			f.write(r.content)
+	print(f"Image saved as {filename}")
 
 except Exception as e:
 	print(e)
