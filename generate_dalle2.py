@@ -18,7 +18,7 @@ try:
 	# extract the filename from the URL and append ".png"
 	filename = os.path.join(os.getcwd(), "..", "Pixel8or", "input", PROMPT + ".png")
 	# download the image and save it with the filename
-	os.system(f"curl -o {filename} {image_url}")
+	os.system(f"curl -o '{filename}' '{image_url}'")
 	print(f"Image saved as {filename}")
 except openai.error.OpenAIError as e:
 	print(e.http_status)
