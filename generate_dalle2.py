@@ -1,31 +1,38 @@
-# generate_dalle2.py
-
 import os
+import requests
+import json
 
-import openai
+PROMPT = input("Enter Prompt (should be automated): ")
+API_KEY = input("Enter API key (should be automated): ")
+input_dir = os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "Pixel8or", "input"))
 
-PROMPT = input("Enter Prompt (should be automated")
 
-openai.api_key = input("Enter API key (should be automated)")
+headers = {
+	'Content-Type': 'application/json',
+	'Authorization': f'Bearer {API_KEY}'
+}
+
+data = {
+	'prompt': PROMPT,
+	'n': 1,
+	'size': '256x256'
+}
+
 try:
-	response = openai.Image.create(
-    		prompt=PROMPT,
-		n=1,
-    		size="256x256",
-	)
-	# get the URL of the image from the OpenAI API response
-	image_url = response["data"][0]["url"]
-	# extract the filename from the URL and append ".png"
-	filename = os.path.join(os.getcwd(), "..", "Pixel8or", "input", PROMPT + ".png")
-	# download the image and save it with the filename
-	os.system(f"curl -o '{filename}' '{image_url}'")
-	print(f"Image saved as {filename}")
-except openai.error.OpenAIError as e:
-	print(e.http_status)
-	print(e.error)
-	with open('generate_dalle2_output.txt', 'w') as output_txt:
-		output_txt.write(e.http_status)
-		output_txt.write(e.error)
+	response = requests.post('https://api.openai.com/v1/images/generations', headers=headers, data=json.dumps(data))
+	response.raise_for_status()
+	# parsing the response assuming it's a json containing url of generated images
+	jsonResponse = response.json()
+	for idx, image_info in enumerate(jsonResponse["data"]):
+		image_url = image_info["url"]
+		filename = os.path.normpath(os.path.join(input_dir, PROMPT.replace(' ', '_') + f"_{idx}.png"))
+		os.system(f"curl -o '{filename}' '{image_url}'")
+		print(f"Image saved as {filename}")
 
-		#okay none of this works and i don't think it even executes so fix this shtuff
-		#i just realized i don't have openai as a module on my test environment that's why this isn't working
+except Exception as e:
+	print(e)
+	with open('generate_dalle2_output.txt', 'w') as output_txt:
+		output_txt.write(str(e))
+
+
+		#this is still so broken
