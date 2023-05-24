@@ -37,7 +37,7 @@ public class ImageGeneration {
             return "alreadyExists";
         }
         //dunno if actually calling script correctly, modify script to save it's output to a txt to be sure
-        String pythonScript = "plugins/dallemc/generate_dalle2.py"; //modify if you want to use another name or another api
+        String pythonScript = "G:\\DalleMC\\plugins\\dallemc\\generate_dalle2.py"; //modify if you want to use another name or another api
         System.out.println("[DEV]:" + pythonScript + apiKey + suggestion);
         ProcessBuilder pb = new ProcessBuilder("C:\\Users\\dylan\\AppData\\Local\\Programs\\Python\\Python311\\python.exe", pythonScript, apiKey, suggestion); //you will have to change this unless i get around to fixing it
         Process process = pb.start();
