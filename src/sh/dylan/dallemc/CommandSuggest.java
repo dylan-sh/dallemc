@@ -34,7 +34,14 @@ public class CommandSuggest implements CommandExecutor {
             player.sendMessage("You must provide a suggestion.");
             return true;
         }
-        String suggestion = args[0];
+
+        // Handling the space in suggestion
+        StringBuilder suggestionBuilder = new StringBuilder();
+        for (String arg : args) {
+            suggestionBuilder.append(arg).append(" ");
+        }
+        String suggestion = suggestionBuilder.toString().trim();  // This is your suggestion
+
         if (suggestionDB.suggestionPresent(suggestion)) {
             player.sendMessage("This has already been suggested by " + suggestionDB.getSuggestor(suggestion).getDisplayName() + ". Use /vote <string> to vote for it.");
         } else {
