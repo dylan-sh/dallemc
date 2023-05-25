@@ -1,4 +1,4 @@
-# DalleMC (not complete yet)
+# DalleMC
 It's dalle... in Minecraft!
 
 
