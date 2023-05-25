@@ -25,11 +25,10 @@ public class Main extends JavaPlugin {
         System.out.println("\033[32m" + "Dalle MC is ready to rumble!" + "\033[0m");
         //timer section
         int delay = 0;
-        int period = 2400;
+        int period = 1200;
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(instance, new Runnable() {
             @Override
             public void run() {
-                Bukkit.broadcastMessage("Voting has started!");
 
                 Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(instance, new Runnable() {
                     @Override
@@ -68,10 +67,10 @@ public class Main extends JavaPlugin {
 
 
                             }
-                        }, 200); // 20 ticks = 1 second
+                        }, 40); // 20 ticks = 1 second
 
                     }
-                }, 500);  // 500 ticks = 25 seconds
+                }, 250);  // 500 ticks = 25 seconds
             }
         }, delay, period);
     }
