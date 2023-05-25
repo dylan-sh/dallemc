@@ -11,13 +11,12 @@ import java.util.Set;
 
 public class CommandVote implements CommandExecutor {
 
-    boolean voted = false;
     SuggestionDB suggestionDB = new SuggestionDB();
     VoteRecords voteRecords = new VoteRecords();
 
     public CommandVote(SuggestionDB suggestionDB, VoteRecords voteRecords) {
         this.suggestionDB = suggestionDB;
-        this.voteRecords = new VoteRecords();
+        this.voteRecords = voteRecords;
     }
 
     @Override
