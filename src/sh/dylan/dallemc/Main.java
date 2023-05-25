@@ -51,6 +51,7 @@ public class Main extends JavaPlugin {
                                 }
                                 Bukkit.broadcastMessage("The winner is " + winner + " with " + suggestionDB.getVotes(winner) + " votes. It was suggested by " + suggestionDB.getSuggestor(winner).getDisplayName());
                                 suggestionDB.clearEverything();
+                                voteRecords.clearEverything();
                                 ImageGeneration imageGenerator = new ImageGeneration(cfp.getAPIKey(), winner);
                                 try {
                                     String filename = imageGenerator.generateImage();
