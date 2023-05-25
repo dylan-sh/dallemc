@@ -1,4 +1,6 @@
 # DalleMC
+
+*updated readme incoming with information on project development, challenges, limitations, etc.*
 It's dalle... in Minecraft!
 
 
