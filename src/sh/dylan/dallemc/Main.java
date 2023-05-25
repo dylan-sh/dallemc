@@ -1,6 +1,7 @@
 package sh.dylan.dallemc;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -53,7 +54,13 @@ public class Main extends JavaPlugin {
                                 suggestionDB.clearEverything();
                                 ImageGeneration imageGenerator = new ImageGeneration(cfp.getAPIKey(), winner);
                                 try {
-                                    Bukkit.broadcastMessage(imageGenerator.getImageAndSaveToPixelator());
+                                    String filename = imageGenerator.generateImage();
+                                    if(filename.contains("Error")){
+                                        Bukkit.broadcastMessage("Error in generation, probably due to NSFW suggestion or network error.");
+                                    }else {
+                                        CommandSender console = Bukkit.getServer().getConsoleSender();
+                                        Bukkit.dispatchCommand(console, "/pixelator " + filename + " world -528 -60 252");
+                                    }
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }

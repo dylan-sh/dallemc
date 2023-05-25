@@ -31,11 +31,8 @@ public class ImageGeneration {
     }
 
     //generates the URL of the image and returns error strings if not there.
-    public String generateURL() throws IOException {
+    public String generateImage() throws IOException {
 
-        if(checksIfAlreadyExists()){
-            return "alreadyExists";
-        }
         //dunno if actually calling script correctly, modify script to save it's output to a txt to be sure
         String pythonScript = "G:\\DalleMC\\plugins\\dallemc\\generate_dalle2.py"; //modify if you want to use another name or another api
         System.out.println("[DEV]:" + pythonScript + apiKey + suggestion);
@@ -46,7 +43,10 @@ public class ImageGeneration {
         System.out.println("[DEV] I got here.");
         if((line = in.readLine()) != null) { //this doesn't need to be a while loop since only the first line matters, but it's here anyway
             System.out.println(line);
-            if(line.substring(0,3).equals("400")){
+            if(line.startsWith("filename:")){
+                String filename = line.substring(9);
+                return filename;
+            }else if(line.substring(0,3).equals("400")){
                 System.out.println("\"\\033[31m\" + \"[API ERROR] Safety system denied (NSFW error)\" + \"\\033[0m\"");
                 Bukkit.broadcastMessage("Unsafe contented detected. Creation aborted (don't suggest nsfw content lol)");
                 return "nsfwError";
@@ -72,30 +72,6 @@ public class ImageGeneration {
         return "IOError";
 
     }
-
-    public boolean checksIfAlreadyExists(){
-        File file = new File("plugins/dallemc/" + suggestion + ".png");
-        return file.exists();
-    }
-
-    //pulls image and returns location
-    public String getImageAndSaveToPixelator() throws IOException {
-        String urlString = generateURL();
-        if(urlString.substring(urlString.length() -5).equals("Error")){
-            System.out.println("\"\\033[31m\" + \"[API ERROR]\" + \"\\033[0m\"");
-            return "Error";
-        }
-        try {
-            URL url = new URL(urlString);
-            BufferedImage image = ImageIO.read(url);
-            File outputFile = new File("plugins/Pixel8or/input" + suggestion + ".png");
-            ImageIO.write(image, "png", outputFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return suggestion + ".png"; //this is a really dumb way of doing this but i've come this far so
-    }
-
 
 
 }

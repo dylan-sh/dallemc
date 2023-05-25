@@ -31,11 +31,20 @@ try:
 	jsonResponse = response.json()
 	for idx, image_info in enumerate(jsonResponse["data"]):
 		image_url = image_info["url"]
-		filename = os.path.normpath(os.path.join(input_dir, PROMPT.replace(' ', '_') + f"_{idx}.png"))
+		base_filename = PROMPT.replace(' ', '_') + f"_{idx}"
+		extension = ".png"
+		filename = os.path.normpath(os.path.join(input_dir, base_filename + extension))
+
+		# If the file already exists, add a suffix to the filename to avoid overwriting
+		suffix = 1
+		while os.path.exists(filename):
+			filename = os.path.normpath(os.path.join(input_dir, base_filename + f"_{suffix}" + extension))
+			suffix += 1
+
 		r = requests.get(image_url)
 		with open(filename, 'wb') as f:
 			f.write(r.content)
-	print(f"Image saved as {filename}")
+	print(f"filename:{filename}")
 
 except Exception as e:
 	print(e)
