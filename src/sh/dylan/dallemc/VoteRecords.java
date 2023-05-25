@@ -52,6 +52,7 @@ public class VoteRecords {
     }
 
     public void clearEverything(){
+        System.out.println("clearing vote records");
         voteRecord.clear();
     }
 }

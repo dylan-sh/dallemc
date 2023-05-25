@@ -68,7 +68,7 @@ public class Main extends JavaPlugin {
 
 
                             }
-                        }, 40); // 20 ticks = 1 second
+                        }, 200); // 20 ticks = 1 second
 
                     }
                 }, 250);  // 500 ticks = 25 seconds
