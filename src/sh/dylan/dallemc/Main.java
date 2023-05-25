@@ -59,6 +59,7 @@ public class Main extends JavaPlugin {
                                         Bukkit.broadcastMessage("Error in generation, probably due to NSFW suggestion or network error.");
                                     }else {
                                         CommandSender console = Bukkit.getServer().getConsoleSender();
+                                        filename = filename.substring(0, filename.length() - 4);
                                         Bukkit.dispatchCommand(console, "pixelator " + filename + " world -528 -60 252");
                                     }
                                 } catch (IOException e) {
