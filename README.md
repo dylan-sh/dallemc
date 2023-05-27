@@ -5,6 +5,7 @@ About ten months ago I was watching an episode of *Techlinked*, a couple times a
 **How it Works:**
 
 [![Youtube Demonstration](https://img.youtube.com/vi/IKPfUOyyxWk/0.jpg)](https://www.youtube.com/watch?v=IKPfUOyyxWk)
+
 *Click the image for a YouTube demonstration*
 
 DalleMC is the plugin to manage it, and I currently host it on my personal server (dallemc.dylan.sh - probably online right now!). DalleMC collects suggestions, allows you to vote on them, and after a certain amount of time a winner is picked. The winning suggestion is then generated in the form of minecraft blocks below.
@@ -16,6 +17,7 @@ The DalleMC server currently generates the image in a 256x256 grid below the pla
 **Development:**
 
 ![UML Diagram](https://github.com/dylan-sh/dallemc/assets/50163127/4ade713c-14e3-4a75-9501-6446d1b36968)
+
 *UML Class Diagram*
 
 Because Minecraft is Java and all plugins are exclusively Java, this was written almost entirely in Java. At the time I started development, I was really interested in [DALL-E Mini](https://github.com/borisdayma/dalle-mini), a model very similar to the DALLE·2 model, but at a fraction of the size. I was initially going to use this to handle AI image generation, but unfortunately it made things complicated as my current hardware isn't optimized for GPU intensive workloads. Luckily I received API access for DALLE·2, and decided to use that instead.
