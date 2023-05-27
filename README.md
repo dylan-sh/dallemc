@@ -2,7 +2,7 @@
 
 About ten months ago I was watching an episode of *Techlinked*, a couple times a week news show on YouTube, in which the host made a joke about having an AI create images using blocks in Minecraft. It was with this that I was inspired to create my own plugin and server to host it, where it would take in suggestions and use AI to generate pixel art of the image. The purpose of DalleMC is to do exactly this.
 
-**How it Works:**
+## How it Works:
 
 [![Youtube Demonstration](https://img.youtube.com/vi/IKPfUOyyxWk/0.jpg)](https://www.youtube.com/watch?v=IKPfUOyyxWk)
 
@@ -14,7 +14,7 @@ There are three commands, /suggest &lt;prompt&gt; which makes a suggestion, /lis
 
 The DalleMC server currently generates the image in a 256x256 grid below the players.
 
-**Development:**
+## Development:
 
 ![UML Diagram](https://github.com/dylan-sh/dallemc/assets/50163127/4ade713c-14e3-4a75-9501-6446d1b36968)
 
@@ -34,16 +34,16 @@ When a suggestion is determined to be the winner, it will call the 'ImageGenerat
 
 After generating the image, the 'Main' class broadcasts the winner with the number of votes and who suggested it. It then calls Pixelator to generate the image, and Pixelator does so. Because [Pixelator](https://github.com/TheBizii/Pixelator) was created to be executed by a player and generated directly at the players location, I had to modify it for my use case. A simple [fork](https://github.com/dylan-sh/Pixelator-Location) and command modification to take in x, y, z coordinates, as well as making it executable by console, was all I needed. 'ImageGeneration' sends the command to the console with the coordinates,and out it goes.
 
-**Limitations:**
+## Limitations:
 
 DalleMC was created for my personal use, and while anyone could use it, I doubt anyone will. Because of this, a lot of aspects have been hardcoded in. I could have used the 'ConfigParser' class to take in a bunch of different aspects, but in the interest of time and scope, I have not. The API was something that I felt most certainly could not be hardcoded in, however.
 
-**Server Setup:**
+## Server Setup:
 
 Spawn is protected by WorldGuard, and the map was created with WorldEdit. There was considerable effort put in as far as creating the activity area, and ensuring it was protected from unauthorized commands and block placement/destruction.
 
 
-**Project Challenges:**
+## Project Challenges:
 
 Because my setup was development on my Mac and hosting on a Windows desktop downstairs, I quickly realized how difficult it was managing my development environment vs the production environment. For example, my python script that called the OpenAI API worked perfectly fine on my Mac, but did not work at all on my PC. I had to make a change to the script to use Python’s ‘requests’ instead of ‘curl’ with ‘os.system’. This solved the issue, but cost me an hour and a half of my time. 
 
